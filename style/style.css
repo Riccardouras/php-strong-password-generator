@@ -1,0 +1,23 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 200px;
+}
+form{
+    background-color: lightcyan;
+    border-radius: 20px;
+    border: 1px solid cyan;
+    padding: 1rem;
+}
+main{
+    background-color: lightcyan;
+    border-radius: 20px;
+    border: 1px solid cyan;
+    padding: 1rem;
+}
+h1{
+    font-size: 1rem;
+    margin: auto auto;
+}
+#font{
+    font-size: 1.5rem;
+}
