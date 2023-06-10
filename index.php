@@ -1,3 +1,14 @@
+<?php
+function generaPassword() {
+    // Opzioni disponibili per la password
+    $lettere = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numeri = '0123456789';
+    $simboli = '!@#$%^&*()_+=-{}[]\|:;"<>,.?/~`';
+
+    // stringa vuota per la password generata
+    $password = '';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
