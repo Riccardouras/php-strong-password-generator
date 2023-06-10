@@ -1,53 +1,4 @@
-<?php
-// VARIABILI GET
-$lunghezzaPassword = $_GET['lunghezza'];
-$consentiRipetizioni = $_GET['ripetizioni'] == 'si'; 
-$consentiLettere = isset($_GET['lettere']);
-$consentiNumeri = isset($_GET['numeri']);
-$consentiSimboli = isset($_GET['simboli']);
 
-function generaPassword($lunghezza, $ripetizioni, $consentiLettere, $consentiNumeri, $consentiSimboli) {
-    // Opzioni disponibili per la password
-    $lettere = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $numeri = '0123456789';
-    $simboli = '!@#$%^&*()_+=-{}[]\|:;"<>,.?/~`';
-
-    // stringa vuota per la password generata
-    $password = '';
-
-     // array con le opzioni disponibili per la password
-     $opzioni = '';
-     if ($consentiLettere) {
-         $opzioni .= $lettere;
-     }
-     if ($consentiNumeri) {
-         $opzioni .= $numeri;
-     }
-     if ($consentiSimboli) {
-         $opzioni .= $simboli;
-     }
-     
-     //lunghezza dell'array delle opzioni
-    $lunghezzaOpzioni = strlen($opzioni);
-
-     // Genera la password
-    for ($i = 0; $i < $lunghezza; $i++) {
-        // Se non consenti ripetizioni, controlla se il carattere è già presente nella password
-        if (!$ripetizioni && $i > 0) {
-            $caratterePrecedente = $password[$i - 1];
-            $opzioni = str_replace($caratterePrecedente, '', $opzioni);
-        }
-
-    // Aggiunge un carattere casuale dalla stringa delle opzioni alla password
-    $password .= $opzioni[rand(0, $lunghezzaOpzioni - 1)];
-    }
-    
-    // Restituisci la password generata
-    return $password;
-}
-
-$passwordGenerata = generaPassword($lunghezzaPassword, $consentiRipetizioni, $consentiLettere, $consentiNumeri, $consentiSimboli);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,20 +7,31 @@ $passwordGenerata = generaPassword($lunghezzaPassword, $consentiRipetizioni, $co
     <title>Strong Password Generator</title>
 </head>
 <body>
+    <?php
+        include 'function.php';
+        // VARIABILI GET
+        $lunghezzaPassword = $_GET['lunghezza'];
+        $consentiRipetizioni = $_GET['ripetizioni'] == 'si'; 
+        $consentiLettere = isset($_GET['lettere']);
+        $consentiNumeri = isset($_GET['numeri']);
+        $consentiSimboli = isset($_GET['simboli']);
+
+        $passwordGenerata = generaPassword($lunghezzaPassword, $consentiRipetizioni, $consentiLettere, $consentiNumeri, $consentiSimboli);
+    ?>
     <header>
         <form action="index.php" method="$_GET">
-            <label for="">Lunghezza Password</label>
+            <label for="lunghezza">Lunghezza Password</label>
             <input type="Number" name="lunghezza" min="8">
-            <label for="">Consenti ripetizioni di uno o più caratteri</label>
-            <label for="">Sì</label>
+            <label for="ripetizioni">Consenti ripetizioni di uno o più caratteri</label>
+            <label for="ripetizioni">Sì</label>
             <input type="radio" name="ripetizioni">
-            <label for="">No</label>
+            <label for="ripetizioni">No</label>
             <input type="radio" name="ripetizioni">
-            <label for="">Lettere</label>
+            <label for="lettere">Lettere</label>
             <input type="checkbox" name="lettere">
-            <label for="">Numeri</label>
+            <label for="numeri">Numeri</label>
             <input type="checkbox" name="numeri">
-            <label for="">Simboli</label>
+            <label for="simboli">Simboli</label>
             <input type="checkbox" name="simboli">
         </form>
     </header>
